@@ -130,6 +130,26 @@ Covers:
 
 ---
 
+### 🏛 System design
+
+**→ [docs/system-design.md](docs/system-design.md)**
+
+Architecture and decision record. Read this if you're evaluating the
+design, extending it, or writing a similar tool.
+
+Covers:
+- Goals and explicit non-goals
+- Context diagram (where the bot sits among Workday + Anthropic + filesystem)
+- Layered architecture with single-responsibility components
+- Data model (Company, JobQuery, JobPosting)
+- External interface contracts (Workday + Anthropic)
+- Sequence diagrams for both REPL modes
+- Failure modes, security & privacy, performance characteristics
+- Design decisions explained (Why Workday-first? Why optional LLM? Why CLI?)
+- Roadmap-style extension points with effort estimates
+
+---
+
 ## License
 
 MIT
