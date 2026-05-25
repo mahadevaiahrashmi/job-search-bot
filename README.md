@@ -150,6 +150,49 @@ Covers:
 
 ---
 
+### 🧩 Skills
+
+**→ [docs/skills.md](docs/skills.md)**
+
+Documents two interpretations of "skill" in this project: the
+invokable Claude Code skill and the internal module-as-skill framing.
+
+Covers:
+- The `.claude/skills/job-search/` skill — trigger phrases, how Claude
+  invokes the bot under the hood, what it does and doesn't do
+- Five internal skills (`company-resolve`, `workday-search`, `csv-write`,
+  `chat-loop`, `slot-fill`) with input/output contracts and failure modes
+- Composition diagram showing how the skills chain together
+- A template for adding new skills
+
+---
+
+### 🔁 Workflows
+
+**→ [docs/workflows.md](docs/workflows.md)**
+
+Recipe-style guide for nine end-to-end user workflows. Copy-paste,
+swap the values, run.
+
+Covers:
+- Quick one-off search · Compare role across multiple companies
+- Daily job-hunt loop with cron · Conversational search with API key
+- Diff against yesterday's results · Importing into Google Sheets
+- Adding a new company · Using the Claude Code skill · Résumé scoring (future)
+- Anti-workflows (what NOT to do)
+
+---
+
+## Repository extras
+
+- **CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — runs
+  on every push/PR against Python 3.11 and 3.12. Validates imports,
+  the company registry, and the CSV writer.
+- **Claude Code skill:** [`.claude/skills/job-search/SKILL.md`](.claude/skills/job-search/SKILL.md)
+  — invoke the bot conversationally from any Claude Code session.
+
+---
+
 ## License
 
 MIT

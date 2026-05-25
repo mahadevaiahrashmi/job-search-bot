@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Compile-check all sources
+        run: uv run python -m compileall -q src/
+
+      - name: Import smoke test
+        run: |
+          uv run python -c "
+          from job_search_bot import bot, companies, workday, csv_writer, models
+          from job_search_bot.companies import resolve_company, known_companies
+          assert resolve_company('pwc') is not None
+          assert resolve_company('jp morgan') is not None
+          assert resolve_company('not-a-real-company') is None
+          assert len(known_companies()) >= 8
+          print('Smoke test passed.')
+          "
+
+      - name: Verify CSV writer in isolation
+        run: |
+          uv run python -c "
+          from pathlib import Path
+          from job_search_bot.csv_writer import write_csv
+          from job_search_bot.models import JobPosting
+          posting = JobPosting(
+              company='Test Co',
+              job_id='TEST123',
+              title='Engineer',
+              location='Remote',
+              posted_on='Today',
+              url='https://example.com/job/123',
+          )
+          path = write_csv([posting], 'test', 'demo', Path('/tmp/csv-test'))
+          assert path.exists(), 'CSV not written'
+          content = path.read_text()
+          assert 'TEST123' in content
+          assert 'company,job_id,title' in content
+          print(f'CSV writer test passed: {path}')
+          "
