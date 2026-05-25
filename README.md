@@ -78,8 +78,57 @@ src/job_search_bot/
 
 ## Documentation
 
-- [docs/non-technical.md](docs/non-technical.md) — what it does, in plain English, with simple flow diagrams.
-- [docs/technical.md](docs/technical.md) — system design, sequence diagrams, Workday API contract, extension points.
+The docs are split by audience. Pick the one that matches what you need.
+
+### 📖 For non-technical readers
+
+**→ [docs/non-technical.md](docs/non-technical.md)**
+
+Plain-English overview of what the bot does and why it exists. No code,
+no jargon, simple flow diagrams. Read this if you want to understand
+the tool before deciding whether to use it.
+
+Covers:
+- What problem it solves (and what it doesn't)
+- A walk-through of a single search
+- What's happening "under the hood" without any code
+- Who this is for
+
+---
+
+### 🛠 For technical readers
+
+**→ [docs/technical.md](docs/technical.md)**
+
+System design and reference documentation for developers extending or
+integrating the bot.
+
+Covers:
+- Component layout and module responsibilities
+- Mermaid sequence diagrams for both REPL modes
+- Workday API contract (endpoint, request/response shapes)
+- Job-ID extraction regex and dedup logic
+- Pagination, error handling, edge cases
+- Extension points: adding Greenhouse/Lever, swapping in a local LLM
+
+---
+
+### 📘 User manual
+
+**→ [docs/user-manual.md](docs/user-manual.md)**
+
+Step-by-step guide for actually running the bot. Start here if you
+just want to use it.
+
+Covers:
+- Install (one-time)
+- Your first search
+- Reading the output CSV
+- Enabling chatbot mode with an API key
+- Adding a new company to the registry
+- Common questions, troubleshooting table, and limits
+
+---
 
 ## License
 
