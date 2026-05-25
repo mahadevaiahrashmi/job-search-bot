@@ -76,6 +76,11 @@ src/job_search_bot/
   models.py       JobQuery, JobPosting dataclasses
 ```
 
+## Documentation
+
+- [docs/non-technical.md](docs/non-technical.md) — what it does, in plain English, with simple flow diagrams.
+- [docs/technical.md](docs/technical.md) — system design, sequence diagrams, Workday API contract, extension points.
+
 ## License
 
 MIT
